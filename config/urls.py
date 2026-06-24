@@ -27,11 +27,11 @@ urlpatterns = [
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('tinymce/', include('tinymce.urls')),
-    path('', include('core.urls')),
-    path('projects/', include('projects.urls')),
-    path('blog/', include('blog.urls')),
-    path('contact/', include('contact.urls')),
-    path('accounts/', include('accounts.urls')),
-    path('portfolio/', include('portfolio.urls')),
-    path('services/', include('services.urls')),
+    path('', include('apps.core.urls')),
+    path('projects/', include('apps.projects.urls')),
+    path('blog/', include('apps.blog.urls')),
+    path('contact/', include('apps.contact.urls')),
+    path('accounts/', include('apps.accounts.urls')),
+    path('portfolio/', include('apps.portfolio.urls')),
+    path('services/', include('apps.services.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
