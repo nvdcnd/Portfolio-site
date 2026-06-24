@@ -16,8 +16,8 @@ class Services(TimeStampedModel):
     display_order = models.PositiveIntegerField(default=0)
 
     class Meta:
-        verbose_name = "AI Development"
-        verbose_name_plural = "AI Developments"
+        verbose_name = "Services"
+        verbose_name_plural = "Services"
 
 class ServiceCategory(TimeStampedModel):
     name = models.CharField(max_length=255)

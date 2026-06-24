@@ -47,8 +47,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary_storage',
     'cloudinary',
-    'django.contrib.sites',
+    #'django.contrib.sites',
     'tinymce',
+    'apps.common',
+    'apps.core',
+    'apps.services',
+    'apps.portfolio',
+    'apps.blog',
+    'apps.contact',
+    'apps.projects',
+    'apps.accounts',
 ]
 
 MIDDLEWARE = [
