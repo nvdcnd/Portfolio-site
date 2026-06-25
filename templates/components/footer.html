@@ -1,0 +1,62 @@
+<footer class="site-footer">
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-lg-4 col-md-12">
+        <a class="footer-brand" href="{% url 'core:home' %}">
+          {% if settings and settings.site_logo %}
+            <img src="{{ settings.site_logo.url }}" alt="{{ settings.site_name|default:'Hoang Hung Anh' }} logo" loading="lazy">
+          {% endif %}
+          <span>{{ settings.site_name|default:"Hoang Hung Anh" }}</span>
+        </a>
+        <div class="footer-copy mt-3">
+          {% if footer and footer.content %}
+            {{ footer.content|safe }}
+          {% else %}
+            <p>Software engineering, mentoring, and technical education with a focus on clarity, reliability, and long-term value.</p>
+          {% endif %}
+        </div>
+        {% if socials %}
+          <div class="footer-socials d-flex gap-2 mt-4">
+            {% for social in socials %}
+              <a href="{{ social.profile_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ social.platform_name }}">
+                <i class="bi {{ social.icon_class }}" aria-hidden="true"></i>
+              </a>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <h2 class="footer-heading h6">Quick Links</h2>
+        <ul class="footer-links list-unstyled">
+          <li><a href="{% url 'core:home' %}">Home</a></li>
+          <li><a href="{% url 'services:index' %}">Services</a></li>
+          <li><a href="{% url 'portfolio:index' %}">Portfolio</a></li>
+          <li><a href="{% url 'blog:index' %}">Blog</a></li>
+          <li><a href="{% url 'contact:index' %}">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <h2 class="footer-heading h6">Contact</h2>
+        <address class="footer-contact mb-0">
+          {% if contact_info %}
+            <a href="mailto:{{ contact_info.email }}">{{ contact_info.email }}</a>
+            <span>{{ contact_info.phone_number }}</span>
+            <span>{{ contact_info.address }}</span>
+          {% else %}
+            <a href="{% url 'contact:index' %}">Contact Hoang Hung Anh</a>
+            <span>Response within 24 hours for relevant inquiries.</span>
+          {% endif %}
+        </address>
+      </div>
+    </div>
+    <hr>
+    <div class="row align-items-center gy-3">
+      <div class="col-md-6 text-center text-md-start">
+        <p class="copyright mb-0">&copy; {% now "Y" %} {{ settings.site_name|default:"Hoang Hung Anh" }}. All rights reserved.</p>
+      </div>
+      <div class="col-md-6 text-center text-md-end">
+        <a class="back-to-top" href="#top">Back to Top</a>
+      </div>
+    </div>
+  </div>
+</footer>

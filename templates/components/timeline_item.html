@@ -1,0 +1,41 @@
+<article class="timeline-item d-flex gap-4">
+  <div class="timeline-aside d-flex flex-column align-items-center" aria-hidden="true">
+    <div class="timeline-marker">
+      {% if item.type == 'education' %}
+        <i class="bi bi-mortarboard-fill"></i>
+      {% else %}
+        <i class="bi bi-briefcase-fill"></i>
+      {% endif %}
+    </div>
+    <div class="timeline-line"></div>
+  </div>
+  <div class="timeline-content">
+    <div class="d-flex flex-column flex-md-row justify-content-between gap-3 mb-3">
+      <div>
+        <span class="card-badge mb-2">{{ item.get_type_display }}</span>
+        <h3 class="h4 mb-1">{{ item.title }}</h3>
+        {% if item.organization %}
+          <p class="timeline-organization mb-0">
+            {% if item.url %}
+              <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer" aria-label="Visit {{ item.organization }}">{{ item.organization }}</a>
+            {% else %}
+              {{ item.organization }}
+            {% endif %}
+            {% if item.location %}<span>{{ item.location }}</span>{% endif %}
+          </p>
+        {% endif %}
+      </div>
+      <time class="timeline-date">
+        {% if item.start_date %}
+          {{ item.start_date|date:"M Y" }} -
+          {% if item.is_current %}Present{% elif item.end_date %}{{ item.end_date|date:"M Y" }}{% else %}{{ item.year|default:"" }}{% endif %}
+        {% else %}
+          {{ item.year|default:"" }}
+        {% endif %}
+      </time>
+    </div>
+    {% if item.description %}
+      <div class="timeline-description">{{ item.description|linebreaks }}</div>
+    {% endif %}
+  </div>
+</article>

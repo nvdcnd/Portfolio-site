@@ -1,0 +1,9 @@
+<article class="stat-card text-center h-100">
+  {% if stat.icon_class %}
+    <div class="stat-icon mb-3">
+      <i class="bi {{ stat.icon_class }}" aria-hidden="true"></i>
+    </div>
+  {% endif %}
+  <p class="stat-value mb-1" aria-label="{{ stat.value }}{{ stat.suffix|default:'' }} {{ stat.title }}">{{ stat.value }}{{ stat.suffix|default:"" }}</p>
+  <h3 class="stat-title mb-0">{{ stat.title }}</h3>
+</article>

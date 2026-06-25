@@ -1,0 +1,37 @@
+<header class="site-header">
+  <nav class="navbar navbar-expand-lg site-navbar" aria-label="Main Navigation" data-navbar>
+    <div class="container">
+      <a class="navbar-brand site-brand" href="{% url 'core:home' %}">
+        {% if settings and settings.site_logo %}
+          <img src="{{ settings.site_logo.url }}" alt="{{ settings.site_name|default:'Hoang Hung Anh' }} logo" class="site-brand-logo" loading="lazy">
+        {% endif %}
+        <span>{{ settings.site_name|default:"Hoang Hung Anh" }}</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNavbar">
+        <ul class="navbar-nav mx-lg-auto mb-3 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.app_name == 'core' %}active{% endif %}" href="{% url 'core:home' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.app_name == 'services' %}active{% endif %}" href="{% url 'services:index' %}">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.app_name == 'portfolio' %}active{% endif %}" href="{% url 'portfolio:index' %}">Portfolio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.app_name == 'blog' %}active{% endif %}" href="{% url 'blog:index' %}">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.app_name == 'contact' %}active{% endif %}" href="{% url 'contact:index' %}">Contact</a>
+          </li>
+        </ul>
+        <a class="btn btn-primary site-navbar-cta" href="{% url 'contact:index' %}">Hire Me</a>
+      </div>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,55 @@
+<section class="hero-section" aria-labelledby="hero-heading">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <p class="hero-greeting mb-3">{{ hero.greeting|default:"Hello, I'm" }}</p>
+        <h1 id="hero-heading" class="hero-title mb-3">{{ hero.title|default:"Hoang Hung Anh" }}</h1>
+        <p class="hero-subtitle mb-3">{{ hero.subtitle|default:"Software Engineer, technical mentor, and STEM educator." }}</p>
+        <div class="hero-description mb-4">
+          {% if hero and hero.description %}
+            {{ hero.description|safe }}
+          {% else %}
+            <p>I build scalable web applications, mentor students in competitive programming and scholarships, and collaborate with organizations on practical technical education.</p>
+          {% endif %}
+        </div>
+        <div class="d-flex flex-column flex-sm-row gap-3 mb-4">
+          <a class="btn btn-primary btn-lg" href="{{ hero.cta1_link|default:'/contact/' }}">{{ hero.cta1_text|default:"Hire Me" }}</a>
+          <a class="btn btn-outline-primary btn-lg" href="{{ hero.cta2_link|default:'/portfolio/' }}">{{ hero.cta2_text|default:"View Portfolio" }}</a>
+        </div>
+        {% if socials %}
+          <div class="hero-socials d-flex align-items-center gap-2" aria-label="Social profiles">
+            {% for social in socials %}
+              <a href="{{ social.profile_url }}" class="hero-social-link" target="_blank" rel="noopener noreferrer" aria-label="{{ social.platform_name }}">
+                <i class="bi {{ social.icon_class }}" aria-hidden="true"></i>
+              </a>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+      <div class="col-lg-6">
+        <div class="hero-portrait-wrap">
+          {% if hero and hero.avatar %}
+            <img src="{{ hero.avatar.url }}" alt="Professional portrait of {{ hero.title|default:'Hoang Hung Anh' }}" class="hero-portrait img-fluid">
+          {% else %}
+            <div class="hero-portrait hero-portrait-placeholder" role="img" aria-label="Professional portrait placeholder">
+              <span>HHA</span>
+            </div>
+          {% endif %}
+          {% if hero and hero.badge_text %}
+            <div class="hero-badge-card" aria-label="{{ hero.badge_text }}">
+              <span class="badge-label">{{ hero.badge_text }}</span>
+            </div>
+          {% endif %}
+          {% if stats %}
+            <div class="hero-floating-card hero-floating-card-primary" aria-hidden="true">
+              {% for stat in stats|slice:":1" %}
+                <strong>{{ stat.value }}{{ stat.suffix|default:"" }}</strong>
+                <span>{{ stat.title }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

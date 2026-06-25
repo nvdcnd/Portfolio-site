@@ -1,0 +1,46 @@
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  line-height: 1.7;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-heading {
+  font-family: var(--font-heading);
+  color: var(--color-primary);
+  line-height: 1.2;
+}
+
+.font-mono,
+.tech-badge {
+  font-family: var(--font-mono);
+}
+
+.section-heading {
+  font-size: 2.25rem;
+  font-weight: 700;
+}
+
+.section-description {
+  max-width: 640px;
+  margin-right: auto;
+  margin-left: auto;
+  color: var(--color-muted);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+.text-left .section-description {
+  margin-left: 0;
+}
+
+@media (max-width: 767.98px) {
+  .section-heading {
+    font-size: 1.875rem;
+  }
+}

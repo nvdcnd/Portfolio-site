@@ -1,6 +1,7 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import redirect
 
-# Create your views here.
 def index(request):
-    return HttpResponse("Projects Index")
+    """
+    Redirect legacy projects paths to portfolio.
+    """
+    return redirect('portfolio:index', permanent=True)

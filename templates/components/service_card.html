@@ -1,0 +1,18 @@
+<article class="card site-card service-card h-100 {% if service.featured %}is-featured{% endif %}">
+  <div class="card-body d-flex flex-column">
+    <div class="d-flex justify-content-between align-items-start gap-3 mb-4">
+      <div class="card-icon" aria-hidden="true">
+        <i class="bi {{ service.icon_class|default:'bi-code-slash' }}"></i>
+      </div>
+      {% if service.category %}
+        <span class="card-badge">{{ service.category.name }}</span>
+      {% endif %}
+    </div>
+    <h3 class="card-title h4">{{ service.title }}</h3>
+    <p class="card-text flex-grow-1">{{ service.short_description }}</p>
+    <a class="btn-text mt-3" href="{% url 'services:index' %}" aria-label="Explore services including {{ service.title }}">
+      Explore {{ service.title }}
+      <i class="bi bi-arrow-right" aria-hidden="true"></i>
+    </a>
+  </div>
+</article>

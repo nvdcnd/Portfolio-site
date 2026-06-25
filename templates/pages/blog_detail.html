@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ post.title }} | Blog | {{ settings.site_name|default:"Hoang Hung Anh" }}{% endblock %}
+{% block meta_description %}{{ post.content|striptags|truncatechars:140 }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/blog.css' %}">
+{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "{{ post.title }}",
+  "description": "{{ post.content|striptags|truncatechars:150|escapejs }}",
+  "datePublished": "{{ post.created_at|date:'c' }}",
+  "dateModified": "{{ post.updated_at|date:'c' }}",
+  "author": {
+    "@type": "Person",
+    "name": "Hoàng Hùng Anh",
+    "jobTitle": "Software Engineer"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ settings.site_name|default:'Hoàng Hùng Anh' }}"
+  },
+  "genre": "{% if post.category %}{{ post.category.name }}{% endif %}",
+  "keywords": [{% for tag in post.tags.all %}"{{ tag.name }}"{% if not forloop.last %},{% endif %}{% endfor %}]
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<article class="article-detail-section bg-surface" aria-labelledby="article-title">
+  <div class="container">
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'core:home' %}" class="text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'blog:index' %}" class="text-decoration-none">Blog</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ post.title|truncatechars:35 }}</li>
+      </ol>
+    </nav>
+    
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <div class="article-content-card">
+          <!-- Category and Date -->
+          <div class="article-meta-info">
+            {% if post.category %}
+              <span class="blog-badge m-0">{{ post.category.name }}</span>
+            {% endif %}
+            <span aria-hidden="true">•</span>
+            <time datetime="{{ post.created_at|date:'Y-m-d' }}">{{ post.created_at|date:"F d, Y" }}</time>
+            <span aria-hidden="true">•</span>
+            <span>By Hoàng Hùng Anh</span>
+          </div>
+
+          <!-- Main Title -->
+          <h1 id="article-title" class="display-4 font-heading fw-bold text-primary mb-4">{{ post.title }}</h1>
+          
+          <!-- Rich Content -->
+          <div class="article-body-content mb-5">
+            {{ post.content|safe }}
+          </div>
+
+          <!-- Tags & Sharing -->
+          <div class="article-footer-row">
+            {% if post.tags.all %}
+              <div class="article-tags">
+                {% for tag in post.tags.all %}
+                  <a href="{% url 'blog:index' %}?q={{ tag.name }}" class="article-tag-badge">#{{ tag.name }}</a>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            <div class="share-buttons">
+              <span class="text-secondary small me-2">Share:</span>
+              <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.build_absolute_uri|urlencode }}" class="share-btn" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">
+                <i class="bi bi-linkedin" aria-hidden="true"></i>
+              </a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri|urlencode }}" class="share-btn" target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">
+                <i class="bi bi-facebook" aria-hidden="true"></i>
+              </a>
+              <button class="share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Link copied to clipboard!');" aria-label="Copy share link">
+                <i class="bi bi-link-45deg" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Reading List -->
+    {% if related_posts %}
+      <div class="row justify-content-center mt-5 pt-5 border-top border-1 border-light">
+        <div class="col-lg-9">
+          <div class="text-center mb-5">
+            <span class="badge bg-secondary-subtle text-primary px-3 py-2 rounded-pill uppercase tracking-wider mb-2">Further Reading</span>
+            <h2 class="h3 font-heading fw-bold">Related Technical Articles</h2>
+          </div>
+          <div class="row g-4">
+            {% for post in related_posts %}
+              <div class="col-md-4">
+                {% include "components/blog_card.html" %}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</article>
+
+{% include "components/cta_banner.html" with title="Looking for architectural software consultations?" description="Discuss backend engineering designs, competitive mentoring paths, or workshop invitations." primary_cta_text="Contact Me" primary_cta_link="/contact/" secondary_cta_text="View Services" secondary_cta_link="/services/" %}
+{% endblock %}

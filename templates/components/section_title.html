@@ -1,0 +1,9 @@
+<div class="section-header text-{{ alignment|default:'center' }} mb-5">
+  {% if badge %}
+    <span class="section-badge">{{ badge }}</span>
+  {% endif %}
+  <h2 {% if heading_id %}id="{{ heading_id }}"{% endif %} class="section-heading mb-3">{{ title }}</h2>
+  {% if description %}
+    <p class="section-description mb-0">{{ description }}</p>
+  {% endif %}
+</div>

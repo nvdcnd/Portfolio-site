@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ project.title }} | Portfolio | {{ settings.site_name|default:"Hoang Hung Anh" }}{% endblock %}
+{% block meta_description %}{{ project.short_description }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/portfolio.css' %}">
+{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "{{ project.title }}",
+  "headline": "{{ project.title }}",
+  "description": "{{ project.short_description|escapejs }}",
+  "image": "{% if project.image %}{{ project.image.url }}{% endif %}",
+  "genre": "{% if project.category %}{{ project.category.name }}{% endif %}",
+  "provider": {
+    "@type": "Person",
+    "name": "Hoàng Hùng Anh",
+    "jobTitle": "Software Engineer"
+  },
+  "keywords": [{% for skill in project.skills.all %}"{{ skill.name }}"{% if not forloop.last %},{% endif %}{% endfor %}]
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<!-- Page Hero Banner -->
+<section class="portfolio-header bg-white" aria-labelledby="project-detail-title">
+  <div class="container">
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'core:home' %}" class="text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'portfolio:index' %}" class="text-decoration-none">Portfolio</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ project.title }}</li>
+      </ol>
+    </nav>
+    
+    <span class="portfolio-badge">{% if project.category %}{{ project.category.name }}{% else %}Case Study{% endif %}</span>
+    <h1 id="project-detail-title" class="portfolio-title display-4">{{ project.title }}</h1>
+    <p class="portfolio-desc lead">{{ project.short_description }}</p>
+    
+    <!-- Demo & Code Buttons -->
+    <div class="d-flex flex-wrap gap-3 mt-4">
+      {% if project.live_url %}
+        <a href="{{ project.live_url }}" class="btn btn-primary rounded-3 px-4 py-2.5" target="_blank" rel="noopener noreferrer">
+          <i class="bi bi-box-arrow-up-right me-2" aria-hidden="true"></i>Live Demo
+        </a>
+      {% endif %}
+      {% if project.github_url %}
+        <a href="{{ project.github_url }}" class="btn btn-outline-secondary rounded-3 px-4 py-2.5" target="_blank" rel="noopener noreferrer">
+          <i class="bi bi-github me-2" aria-hidden="true"></i>Source Code
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<!-- Main Details -->
+<section class="project-detail-section bg-surface">
+  <div class="container">
+    <div class="row g-5">
+      <!-- Left Column: Case Study content & Gallery -->
+      <div class="col-lg-8">
+        <div class="case-study-card mb-5">
+          <!-- Main Cover Image -->
+          {% if project.image %}
+            <div class="text-center mb-5">
+              <img src="{{ project.image.url }}" alt="{{ project.title }} system design layout diagram" class="img-fluid rounded-4 w-100" style="max-height: 480px; object-fit: cover;" loading="lazy">
+            </div>
+          {% endif %}
+
+          <div class="case-study-body">
+            {{ project.description|safe }}
+          </div>
+        </div>
+
+        <!-- Screenshots Gallery -->
+        {% if images %}
+          <div class="gallery-section bg-white p-4 p-md-5 rounded-4 border border-1 shadow-sm">
+            <h2 id="gallery-heading" class="h3 font-heading fw-bold mb-4 text-primary">Screenshots & System Design</h2>
+            <div class="gallery-grid">
+              {% for img in images %}
+                <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-img-url="{{ img.image.url }}" data-bs-caption="{{ img.caption|default:project.title }}">
+                  <img src="{{ img.image.url }}" alt="{{ img.caption|default:project.title }} screenshot" loading="lazy">
+                  {% if img.caption %}
+                    <div class="gallery-caption">{{ img.caption }}</div>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+
+          <!-- Lightbox Modal -->
+          <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="gallery-heading" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+              <div class="modal-content border-0 bg-transparent">
+                <div class="modal-body p-0 position-relative text-center">
+                  <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                  <img src="" id="lightbox-img" class="img-fluid rounded-3 shadow-lg" alt="Enlarged screenshot" style="max-height: 85vh;">
+                  <p id="lightbox-caption" class="text-white mt-3 fs-5"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <script>
+            document.addEventListener('DOMContentLoaded', function () {
+              const imageModal = document.getElementById('imageModal');
+              if (imageModal) {
+                imageModal.addEventListener('show.bs.modal', function (event) {
+                  const item = event.relatedTarget;
+                  const imgUrl = item.getAttribute('data-bs-img-url');
+                  const caption = item.getAttribute('data-bs-caption');
+                  
+                  const modalImg = imageModal.querySelector('#lightbox-img');
+                  const modalCaption = imageModal.querySelector('#lightbox-caption');
+                  
+                  modalImg.src = imgUrl;
+                  modalCaption.textContent = caption || '';
+                });
+              }
+            });
+          </script>
+        {% endif %}
+      </div>
+
+      <!-- Right Column: Sidebar Specs -->
+      <div class="col-lg-4">
+        <div class="project-sidebar-card">
+          <h3 class="project-sidebar-title font-heading">Project Meta Details</h3>
+          <ul class="project-meta-list">
+            <li class="project-meta-item">
+              <i class="bi bi-calendar3" aria-hidden="true"></i>
+              <div>
+                <strong>Timeline:</strong><br>
+                <span>{{ project.created_at|date:"F Y" }}</span>
+              </div>
+            </li>
+            <li class="project-meta-item">
+              <i class="bi bi-folder-fill" aria-hidden="true"></i>
+              <div>
+                <strong>Category:</strong><br>
+                <span>{% if project.category %}{{ project.category.name }}{% else %}General{% endif %}</span>
+              </div>
+            </li>
+            <li class="project-meta-item">
+              <i class="bi bi-person-fill" aria-hidden="true"></i>
+              <div>
+                <strong>Lead Developer:</strong><br>
+                <span>Hoàng Hùng Anh</span>
+              </div>
+            </li>
+          </ul>
+
+          {% if project.skills.all %}
+            <div class="mt-4 pt-3 border-top border-1 border-light">
+              <h4 class="h6 font-heading fw-bold mb-3">Technologies Employed</h4>
+              <div class="project-skills-list">
+                {% for skill in project.skills.all %}
+                  <span class="project-skill-badge">
+                    {% if skill.icon_class %}<i class="{{ skill.icon_class }} me-1" aria-hidden="true"></i>{% endif %}
+                    {{ skill.name }}
+                  </span>
+                {% endfor %}
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Projects -->
+    {% if related_projects %}
+      <div class="mt-5 pt-5 border-top border-1 border-light">
+        <div class="text-center mb-5">
+          <span class="badge bg-secondary-subtle text-primary px-3 py-2 rounded-pill uppercase tracking-wider mb-2">Similiar Work</span>
+          <h2 class="h3 font-heading fw-bold">Related Projects</h2>
+        </div>
+        <div class="row g-4">
+          {% for project in related_projects %}
+            <div class="col-md-6">
+              {% include "components/project_card.html" %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% include "components/cta_banner.html" with title="Have a complex system architecture in mind?" description="Let's collaborate on codebases that follow clean engineering guidelines." primary_cta_text="Inquire Details" primary_cta_link="/contact/" secondary_cta_text="Browse Portfolio" secondary_cta_link="/portfolio/" %}
+{% endblock %}

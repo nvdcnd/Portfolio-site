@@ -1,0 +1,16 @@
+<section class="cta-banner text-center" aria-labelledby="cta-heading">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <h2 id="cta-heading" class="cta-title mb-3">{{ title|default:"Ready to work together?" }}</h2>
+        <p class="cta-description mb-4">{{ description|default:"Let's collaborate to build reliable software systems or support the next generation of technical talent." }}</p>
+        <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+          <a class="btn btn-primary btn-lg" href="{{ primary_cta_link|default:'/contact/' }}">{{ primary_cta_text|default:"Get In Touch" }}</a>
+          {% if secondary_cta_text and secondary_cta_link %}
+            <a class="btn btn-outline-light btn-lg" href="{{ secondary_cta_link }}">{{ secondary_cta_text }}</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

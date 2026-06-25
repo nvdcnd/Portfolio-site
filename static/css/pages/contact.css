@@ -1,0 +1,167 @@
+/* Contact Page CSS - Modern Academic Luxury style */
+
+/* Page Header */
+.contact-header {
+  padding: 64px 0 40px 0;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--white);
+}
+
+.contact-badge {
+  display: inline-flex;
+  padding: 6px 16px;
+  background-color: rgba(37, 99, 235, 0.08);
+  color: var(--accent-color);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 999px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.contact-title {
+  color: var(--primary-color);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.contact-desc {
+  color: var(--text-secondary);
+  font-size: 18px;
+  max-width: 650px;
+  line-height: 1.6;
+}
+
+/* Page Content Split */
+.contact-section {
+  padding: 80px 0;
+}
+
+/* Left Column: Direct details */
+.contact-details-wrapper {
+  padding-right: 24px;
+}
+
+.contact-detail-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.contact-detail-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background-color: var(--white);
+  border: 1px solid var(--border-color);
+  color: var(--accent-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.contact-detail-text h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 6px;
+}
+
+.contact-detail-text p {
+  color: var(--text-secondary);
+  font-size: 15px;
+  margin-bottom: 0;
+  line-height: 1.6;
+}
+
+.contact-social-section {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border-color);
+}
+
+.contact-social-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+
+.contact-social-links {
+  display: flex;
+  gap: 12px;
+}
+
+.contact-social-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background-color: var(--white);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.contact-social-btn:hover {
+  background-color: var(--accent-color);
+  color: var(--white);
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+/* Right Column: Inquiry Form */
+.contact-form-card {
+  background-color: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: var(--shadow-md);
+}
+
+.contact-form-card .form-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 8px;
+}
+
+.contact-form-card .form-control {
+  font-size: 15px;
+  padding: 12px 16px;
+  border: 1px solid var(--border-color);
+  transition: all 0.2s ease;
+}
+
+.contact-form-card .form-control:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+  outline: none;
+}
+
+.contact-form-card .is-invalid {
+  border-color: var(--error-color) !important;
+}
+
+.contact-form-card .is-invalid:focus {
+  box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.1) !important;
+}
+
+.contact-form-card .invalid-feedback {
+  font-size: 13px;
+  color: var(--error-color);
+  margin-top: 6px;
+}

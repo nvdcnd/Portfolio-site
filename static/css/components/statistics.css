@@ -1,0 +1,34 @@
+.stats-section {
+  background: #ffffff;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.stat-card {
+  padding: 24px 12px;
+}
+
+.stat-icon {
+  color: var(--color-accent);
+  font-size: 2rem;
+}
+
+.stat-value {
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.stat-title {
+  color: var(--color-muted);
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+@media (max-width: 575.98px) {
+  .stat-value {
+    font-size: 2rem;
+  }
+}

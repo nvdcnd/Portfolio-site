@@ -1,0 +1,63 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% if seo %}{{ seo.meta_title }}{% else %}Hoang Hung Anh | Software Engineer{% endif %}{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}{% if seo %}{{ seo.meta_description }}{% else %}Personal portfolio of Hoang Hung Anh, software engineer, mentor, and technical educator.{% endif %}{% endblock %}">
+    {% if seo and seo.meta_keywords %}<meta name="keywords" content="{{ seo.meta_keywords }}">{% endif %}
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
+
+    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+    <meta property="og:title" content="{% block og_title %}{% if seo %}{{ seo.meta_title }}{% else %}Hoang Hung Anh | Software Engineer{% endif %}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{% if seo %}{{ seo.meta_description }}{% else %}Personal portfolio of Hoang Hung Anh, software engineer, mentor, and technical educator.{% endif %}{% endblock %}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:image" content="{% block og_image %}{% if hero and hero.avatar %}{{ hero.avatar.url }}{% endif %}{% endblock %}">
+    <meta name="twitter:card" content="summary_large_image">
+
+    {% if settings and settings.favicon %}
+      <link rel="icon" href="{{ settings.favicon.url }}">
+    {% endif %}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/base/variables.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base/typography.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components/hero.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components/cards.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components/statistics.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components/timeline.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components/cta-banner.css' %}">
+    {% block extra_css %}{% endblock %}
+    {% block structured_data %}{% endblock %}
+  </head>
+  <body id="top">
+    {% include "components/navbar.html" %}
+    <main id="main-content">
+      {% if messages %}
+        <div class="container messages-container">
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags|default:'info' }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+      {% block content %}{% endblock %}
+    </main>
+    {% include "components/footer.html" %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/components/navbar.js' %}" defer></script>
+    <script src="{% static 'js/main.js' %}" defer></script>
+    {% block extra_js %}{% endblock %}
+  </body>
+</html>

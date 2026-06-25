@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}My Services | {{ settings.site_name|default:"Hoang Hung Anh" }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/services.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="services-header" aria-labelledby="services-main-title">
+  <div class="container">
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'core:home' %}" class="text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Services</li>
+      </ol>
+    </nav>
+    
+    <span class="services-badge">What I Do</span>
+    <h1 id="services-main-title" class="services-title">My Professional Services</h1>
+    <p class="services-desc">Freelance software engineering, technical mentoring, academic consulting, and workshops tailored for high performance and measurable outcomes.</p>
+    
+    {% if categories %}
+      <div class="filter-tabs-wrapper">
+        <div class="nav filter-nav" id="services-tab" role="tablist">
+          <button class="nav-link active" id="all-tab" data-bs-toggle="tab" data-bs-target="#all-services" type="button" role="tab" aria-controls="all-services" aria-selected="true">All Services</button>
+          {% for category in categories %}
+            <button class="nav-link" id="cat-{{ category.slug }}-tab" data-bs-toggle="tab" data-bs-target="#cat-{{ category.slug }}" type="button" role="tab" aria-controls="cat-{{ category.slug }}" aria-selected="false">{{ category.name }}</button>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section-spacing bg-surface" aria-label="Services List">
+  <div class="container">
+    <div class="tab-content" id="services-tabContent">
+      <!-- All Services Tab Pane -->
+      <div class="tab-pane fade show active" id="all-services" role="tabpanel" aria-labelledby="all-tab">
+        {% if services %}
+          <div class="row g-4">
+            {% for service in services %}
+              <div class="col-md-6 col-lg-4">
+                {% include "components/service_card.html" %}
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="text-center py-5">
+            <i class="bi bi-gear-wide-connected display-1 text-muted mb-3 d-block"></i>
+            <p class="text-secondary fs-5">No services available at this time.</p>
+          </div>
+        {% endif %}
+      </div>
+      
+      <!-- Category Specific Tab Panes -->
+      {% for category in categories %}
+        <div class="tab-pane fade" id="cat-{{ category.slug }}" role="tabpanel" aria-labelledby="cat-{{ category.slug }}-tab">
+          <div class="row g-4">
+            {% for service in services %}
+              {% if service.category.id == category.id %}
+                <div class="col-md-6 col-lg-4">
+                  {% include "components/service_card.html" %}
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% include "components/cta_banner.html" with title="Need a custom software solution or mentoring program?" description="Get in touch to discuss details, scheduling, and tailored outcomes." primary_cta_text="Contact Me" primary_cta_link="/contact/" secondary_cta_text="View My Work" secondary_cta_link="/portfolio/" %}
+{% endblock %}

@@ -9,6 +9,8 @@ class Project(TimeStampedModel):
     slug = models.SlugField(unique=True)
     short_description = models.TextField()
     image = models.ImageField(upload_to='projects/')
+    github_url = models.URLField(blank=True, null=True, verbose_name="GitHub URL")
+    live_url = models.URLField(blank=True, null=True, verbose_name="Live Demo URL")
     is_active = models.BooleanField(default=True)
     skills = models.ManyToManyField('Skill', related_name='projects')
     category = models.ForeignKey('ProjectCategory', on_delete=models.CASCADE, related_name='projects')

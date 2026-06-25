@@ -1,0 +1,30 @@
+.cta-banner {
+  padding-top: 80px;
+  padding-bottom: 80px;
+  background: var(--color-primary);
+  color: #ffffff;
+}
+
+.cta-title {
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 2.25rem;
+  font-weight: 700;
+}
+
+.cta-description {
+  color: var(--color-footer-muted);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 575.98px) {
+  .cta-banner {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .cta-title {
+    font-size: 1.875rem;
+  }
+}

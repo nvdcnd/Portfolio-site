@@ -1,0 +1,277 @@
+/* Blog CSS - Modern Academic Luxury style */
+
+/* Page Header */
+.blog-header {
+  padding: 64px 0 40px 0;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--white);
+}
+
+.blog-badge {
+  display: inline-flex;
+  padding: 6px 16px;
+  background-color: rgba(37, 99, 235, 0.08);
+  color: var(--accent-color);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 999px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.blog-title {
+  color: var(--primary-color);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.blog-desc {
+  color: var(--text-secondary);
+  font-size: 18px;
+  max-width: 650px;
+  line-height: 1.6;
+}
+
+/* Search and Filters */
+.search-filter-card {
+  background-color: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Sidebar Widgets */
+.sidebar-widget {
+  background-color: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.widget-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px;
+}
+
+.widget-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.widget-list-item {
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+}
+
+.widget-list-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.widget-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  display: block;
+  line-height: 1.4;
+}
+
+.widget-link:hover {
+  color: var(--accent-color);
+}
+
+.widget-meta {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* Category pills in sidebar */
+.category-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.category-cloud-link {
+  font-size: 13px;
+  padding: 6px 14px;
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.category-cloud-link:hover, .category-cloud-link.active {
+  background-color: var(--accent-color);
+  color: var(--white);
+  border-color: var(--accent-color);
+}
+
+/* Article detail container */
+.article-detail-section {
+  padding: 64px 0 80px 0;
+}
+
+.article-content-card {
+  background-color: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 48px;
+  box-shadow: var(--shadow-sm);
+}
+
+.article-meta-info {
+  color: var(--text-secondary);
+  font-size: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+/* TinyMCE typography styles */
+.article-body-content {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #334155; /* Slate secondary */
+}
+
+.article-body-content p {
+  margin-bottom: 24px;
+}
+
+.article-body-content h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-top: 48px;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.article-body-content h3 {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-top: 36px;
+  margin-bottom: 16px;
+}
+
+.article-body-content blockquote {
+  border-left: 4px solid var(--accent-color);
+  background-color: var(--surface-color);
+  padding: 20px 24px;
+  margin: 32px 0;
+  border-radius: 0 12px 12px 0;
+  font-style: italic;
+  font-size: 17px;
+  color: var(--text-primary);
+}
+
+/* Code Blocks Styling */
+.article-body-content pre {
+  background-color: #0f172a; /* Navy background */
+  color: #f8fafc;
+  padding: 24px;
+  border-radius: 12px;
+  margin: 32px 0;
+  overflow-x: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.article-body-content code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9em;
+  padding: 2px 6px;
+  background-color: var(--surface-color);
+  border-radius: 4px;
+  color: #c7254e;
+}
+
+.article-body-content pre code {
+  color: inherit;
+  padding: 0;
+  background-color: transparent;
+  border-radius: 0;
+}
+
+/* Tags and Share Row */
+.article-footer-row {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.article-tag-badge {
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  padding: 4px 12px;
+  border-radius: 999px;
+  transition: all 0.2s ease;
+}
+
+.article-tag-badge:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+.share-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.share-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  background-color: var(--white);
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.share-btn:hover {
+  background-color: var(--accent-color);
+  color: var(--white);
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+}

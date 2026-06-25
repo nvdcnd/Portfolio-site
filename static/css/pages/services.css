@@ -1,0 +1,192 @@
+/* Services CSS - Modern Academic Luxury style */
+
+/* Page Header */
+.services-header {
+  padding: 64px 0 40px 0;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--white);
+}
+
+.services-badge {
+  display: inline-flex;
+  padding: 6px 16px;
+  background-color: rgba(37, 99, 235, 0.08);
+  color: var(--accent-color);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 999px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.services-title {
+  color: var(--primary-color);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.services-desc {
+  color: var(--text-secondary);
+  font-size: 18px;
+  max-width: 650px;
+  line-height: 1.6;
+}
+
+/* Category Filter Tabs */
+.filter-tabs-wrapper {
+  margin-top: 40px;
+}
+
+.filter-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  border-bottom: none;
+}
+
+.filter-nav .nav-link {
+  color: var(--text-secondary);
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  padding: 10px 24px;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.25s ease;
+}
+
+.filter-nav .nav-link:hover {
+  color: var(--primary-color);
+  border-color: #cbd5e1;
+  background-color: var(--white);
+}
+
+.filter-nav .nav-link.active {
+  color: var(--white) !important;
+  background-color: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+/* Service detail layout */
+.service-detail-section {
+  padding: 80px 0;
+}
+
+.service-detail-body {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text-primary);
+}
+
+.service-detail-body h2 {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-top: 40px;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.service-detail-body p {
+  margin-bottom: 24px;
+}
+
+.service-detail-body ul {
+  padding-left: 20px;
+  margin-bottom: 32px;
+}
+
+.service-detail-body li {
+  margin-bottom: 12px;
+}
+
+/* Service Detail Sidebar */
+.sidebar-card {
+  background-color: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 100px;
+  transition: box-shadow 0.3s ease;
+}
+
+.sidebar-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.sidebar-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 16px;
+}
+
+.sidebar-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 32px;
+}
+
+.sidebar-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+  font-size: 15px;
+}
+
+.sidebar-list-item i {
+  color: var(--accent-color);
+  font-size: 18px;
+}
+
+.sidebar-list-item span {
+  color: var(--text-primary);
+}
+
+/* FAQs Accordion */
+.faq-section {
+  margin-top: 60px;
+}
+
+.faq-accordion .accordion-item {
+  border: 1px solid var(--border-color);
+  border-radius: 12px !important;
+  margin-bottom: 16px;
+  overflow: hidden;
+  background-color: var(--white);
+  transition: all 0.25s ease;
+}
+
+.faq-accordion .accordion-item:hover {
+  border-color: #cbd5e1;
+}
+
+.faq-accordion .accordion-button {
+  padding: 20px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--primary-color);
+  background-color: var(--white);
+  box-shadow: none;
+}
+
+.faq-accordion .accordion-button:not(.collapsed) {
+  color: var(--accent-color);
+  background-color: rgba(37, 99, 235, 0.02);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.faq-accordion .accordion-body {
+  padding: 24px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}

@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}{% if seo %}{{ seo.meta_title }}{% else %}Hoang Hung Anh | Software Engineer{% endif %}{% endblock %}
+{% block meta_description %}{% if seo %}{{ seo.meta_description }}{% else %}Software engineering portfolio of Hoang Hung Anh, covering freelance development, mentoring, projects, and technical writing.{% endif %}{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Hoang Hung Anh",
+  "jobTitle": "Software Engineer",
+  "url": "{{ request.scheme }}://{{ request.get_host }}{% url 'core:home' %}",
+  "sameAs": [
+    {% for social in socials %}"{{ social.profile_url }}"{% if not forloop.last %},{% endif %}{% endfor %}
+  ]
+}
+</script>
+{% endblock %}
+
+{% block content %}
+  {% include "components/hero.html" %}
+
+  {% if stats %}
+    <section class="stats-section section-spacing" aria-labelledby="stats-heading">
+      <div class="container">
+        <h2 id="stats-heading" class="visually-hidden">Professional statistics</h2>
+        <div class="row g-4">
+          {% for stat in stats %}
+            <div class="col-6 col-md-3">
+              {% include "components/stat_card.html" %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  {% if services %}
+    <section class="section-spacing bg-surface" aria-labelledby="services-heading">
+      <div class="container">
+        {% include "components/section_title.html" with heading_id="services-heading" badge="What I Do" title="Services" description="Freelance development, mentoring, consulting, and technical education focused on practical outcomes." %}
+        <div class="row g-4">
+          {% for service in services %}
+            <div class="col-md-6 col-lg-4">
+              {% include "components/service_card.html" %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  {% if projects %}
+    <section class="section-spacing" aria-labelledby="projects-heading">
+      <div class="container">
+        {% include "components/section_title.html" with heading_id="projects-heading" badge="My Work" title="Featured Projects" description="Selected software projects and case studies that demonstrate architecture, implementation quality, and technical judgment." %}
+        <div class="row g-4">
+          {% for project in projects %}
+            <div class="col-md-6 col-lg-4">
+              {% include "components/project_card.html" %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  {% if timeline_items %}
+    <section class="section-spacing bg-surface" aria-labelledby="timeline-heading">
+      <div class="container">
+        {% include "components/section_title.html" with heading_id="timeline-heading" badge="My Journey" title="Education & Experience" description="A concise view of professional and academic milestones." %}
+        <div class="timeline-container">
+          {% for item in timeline_items %}
+            {% include "components/timeline_item.html" %}
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  {% if testimonials %}
+    <section class="section-spacing" aria-labelledby="testimonials-heading">
+      <div class="container">
+        {% include "components/section_title.html" with heading_id="testimonials-heading" badge="Client Reviews" title="What People Say" description="Feedback from people who have worked with or learned from Hoang Hung Anh." %}
+        <div class="row g-4">
+          {% for testimonial in testimonials %}
+            <div class="col-md-6 col-lg-4">
+              {% include "components/testimonial_card.html" %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  {% if posts %}
+    <section class="section-spacing bg-surface" aria-labelledby="articles-heading">
+      <div class="container">
+        {% include "components/section_title.html" with heading_id="articles-heading" badge="Writing" title="Latest Articles" description="Technical writing about backend engineering, software architecture, AI, and learning." %}
+        <div class="row g-4">
+          {% for post in posts %}
+            <div class="col-md-6 col-lg-4">
+              {% include "components/blog_card.html" %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  {% include "components/cta_banner.html" with title="Ready to build something reliable?" description="Work with Hoang Hung Anh on scalable software, mentoring, or technical education programs." primary_cta_text="Contact Me" primary_cta_link="/contact/" secondary_cta_text="View Portfolio" secondary_cta_link="/portfolio/" %}
+{% endblock %}

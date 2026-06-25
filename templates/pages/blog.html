@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Technical Blog | {{ settings.site_name|default:"Hoang Hung Anh" }}{% endblock %}
+{% block meta_description %}Read technical articles on backend engineering, system architecture, Competitive Programming, and AI search engine optimization by Hoang Hung Anh.{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/blog.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="blog-header bg-white" aria-labelledby="blog-main-title">
+  <div class="container">
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'core:home' %}" class="text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Blog</li>
+      </ol>
+    </nav>
+    
+    <span class="blog-badge">Articles</span>
+    <h1 id="blog-main-title" class="blog-title">Technical Blog & Writings</h1>
+    <p class="blog-desc">Articles on backend engineering, system architecture, Competitive Programming (scholarship/STEM), and AI-era SEO.</p>
+  </div>
+</section>
+
+<section class="section-spacing bg-surface">
+  <div class="container">
+    <div class="row g-4">
+      <!-- Left Column: Articles Feed -->
+      <div class="col-lg-8">
+        {% if posts %}
+          <div class="row g-4 mb-5">
+            {% for post in posts %}
+              <div class="col-md-6">
+                {% include "components/blog_card.html" %}
+              </div>
+            {% endfor %}
+          </div>
+          
+          <!-- Pagination -->
+          {% if posts.has_other_pages %}
+            <nav aria-label="Blog pagination">
+              <ul class="pagination justify-content-center">
+                {% if posts.has_previous %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{ posts.previous_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}{% if category_slug %}&category={{ category_slug }}{% endif %}" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                {% else %}
+                  <li class="page-item disabled">
+                    <span class="page-link">&laquo;</span>
+                  </li>
+                {% endif %}
+                
+                {% for num in posts.paginator.page_range %}
+                  {% if posts.number == num %}
+                    <li class="page-item active" aria-current="page">
+                      <span class="page-link">{{ num }}</span>
+                    </li>
+                  {% elif num > posts.number|add:'-3' and num < posts.number|add:'3' %}
+                    <li class="page-item">
+                      <a class="page-link" href="?page={{ num }}{% if search_query %}&q={{ search_query }}{% endif %}{% if category_slug %}&category={{ category_slug }}{% endif %}">{{ num }}</a>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+                
+                {% if posts.has_next %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{ posts.next_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}{% if category_slug %}&category={{ category_slug }}{% endif %}" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                {% else %}
+                  <li class="page-item disabled">
+                    <span class="page-link">&raquo;</span>
+                  </li>
+                {% endif %}
+              </ul>
+            </nav>
+          {% endif %}
+        {% else %}
+          <div class="text-center py-5 bg-white border border-1 rounded-4 shadow-sm">
+            <i class="bi bi-journal-x display-1 text-muted mb-3 d-block"></i>
+            <p class="text-secondary fs-5 mb-0">No articles matched your search or category.</p>
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Right Column: Sidebar (Search, Categories, Recent) -->
+      <div class="col-lg-4">
+        <!-- Search Widget -->
+        <div class="sidebar-widget">
+          <h2 class="widget-title">Search Articles</h2>
+          <form method="GET" action="{% url 'blog:index' %}" class="d-flex gap-2">
+            <input type="text" name="q" class="form-control rounded-3" placeholder="Type keywords..." value="{{ search_query }}" aria-label="Search keywords">
+            {% if category_slug %}
+              <input type="hidden" name="category" value="{{ category_slug }}">
+            {% endif %}
+            <button type="submit" class="btn btn-primary rounded-3 px-3"><i class="bi bi-search" aria-hidden="true"></i></button>
+          </form>
+        </div>
+
+        <!-- Categories Widget -->
+        {% if categories %}
+          <div class="sidebar-widget">
+            <h2 class="widget-title">Categories</h2>
+            <div class="category-cloud">
+              <a href="{% url 'blog:index' %}{% if search_query %}?q={{ search_query }}{% endif %}" class="category-cloud-link {% if not category_slug %}active{% endif %}">
+                All Categories
+              </a>
+              {% for cat in categories %}
+                <a href="{% url 'blog:index' %}?category={{ cat.slug }}{% if search_query %}&q={{ search_query }}{% endif %}" class="category-cloud-link {% if category_slug == cat.slug %}active{% endif %}">
+                  {{ cat.name }}
+                </a>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+
+        <!-- Recent Posts Widget -->
+        {% if recent_posts %}
+          <div class="sidebar-widget">
+            <h2 class="widget-title">Recent Articles</h2>
+            <ul class="widget-list">
+              {% for rpost in recent_posts %}
+                <li class="widget-list-item">
+                  <a href="{% url 'blog:detail' slug=rpost.slug %}" class="widget-link">
+                    {{ rpost.title }}
+                  </a>
+                  <div class="widget-meta">
+                    <time datetime="{{ rpost.created_at|date:'Y-m-d' }}">{{ rpost.created_at|date:"M d, Y" }}</time>
+                  </div>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% include "components/cta_banner.html" with title="Want to receive updates on new articles?" description="Let's build reliable backend software systems." primary_cta_text="Contact Me" primary_cta_link="/contact/" secondary_cta_text="Read Services" secondary_cta_link="/services/" %}
+{% endblock %}
