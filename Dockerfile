@@ -5,4 +5,4 @@ RUN pip install -r requirements.txt
 
 COPY . .
 EXPOSE 10000
-CMD ["gunicorn", "config.asgi:application", "--bind", "[IP_ADDRESS]:8000"]
+CMD "gunicorn porifolio_site.asgi:application  --workers 2 --threads 4 --timeout 120"
