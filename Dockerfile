@@ -1,8 +1,11 @@
 FROM python:3.9.13
 WORKDIR /app
-COPY ./requirements/
-RUN pip install -r base.txt
-RUN pip install -r prod.txt
+
+ENV PYTHONUNBUFFERED=1
+
+COPY requirements/ ./requirements/
+RUN pip install --no-cache-dir -r requirements/base.txt
+RUN pip install --no-cache-dir -r requirements/prod.txt
 
 COPY . .
 EXPOSE 10000
