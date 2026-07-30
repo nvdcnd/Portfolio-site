@@ -1,0 +1,1 @@
+web: gunicorn porifolio_site.asgi:application --bind --workers 2 --threads 4 --timeout 120
