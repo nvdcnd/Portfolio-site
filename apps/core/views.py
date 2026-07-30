@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 
 from apps.blog.models import Post
 from apps.common.models import (
