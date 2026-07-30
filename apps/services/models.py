@@ -12,6 +12,9 @@ class Services(TimeStampedModel):
     featured = models.BooleanField(default=False)
     image = models.ImageField(upload_to='ai_development/')
     is_active = models.BooleanField(default=True)
+    delivery_mode = models.CharField(max_length=255, blank=True, null=True)
+    timeline = models.CharField(max_length=255, blank=True, null=True)
+    response_time = models.CharField(max_length=255, blank=True, null=True)
     category = models.ForeignKey('ServiceCategory', on_delete=models.CASCADE, related_name='services')
     display_order = models.PositiveIntegerField(default=0)
 

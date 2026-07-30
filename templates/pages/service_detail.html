@@ -49,7 +49,7 @@
         <li class="breadcrumb-item active" aria-current="page">{{ service.title }}</li>
       </ol>
     </nav>
-    
+
     <span class="services-badge">{% if service.category %}{{ service.category.name }}{% else %}Services{% endif %}</span>
     <h1 id="service-title" class="services-title display-4">{{ service.title }}</h1>
     <p class="services-desc lead">{{ service.short_description }}</p>
@@ -64,11 +64,12 @@
       <div class="col-lg-8">
         <div class="bg-white p-4 p-md-5 rounded-4 border border-1 shadow-sm mb-5">
           {% if service.image %}
-            <div class="mb-4 text-center">
-              <img src="{{ service.image.url }}" alt="{{ service.title }} service cover" class="img-fluid rounded-4 w-100" style="max-height: 400px; object-fit: cover;">
-            </div>
+          <div class="mb-4 text-center">
+            <img src="{{ service.image.url }}" alt="{{ service.title }} service cover" class="img-fluid rounded-4 w-100"
+              style="max-height: 400px; object-fit: cover;">
+          </div>
           {% endif %}
-          
+
           <h2 class="visually-hidden">Service Description</h2>
           <div class="service-detail-body">
             {{ service.description|safe }}
@@ -77,25 +78,29 @@
 
         <!-- FAQs Accordion -->
         {% if faqs %}
-          <div class="faq-section bg-white p-4 p-md-5 rounded-4 border border-1 shadow-sm">
-            <h2 id="faqs-heading" class="h3 mb-4 text-primary font-heading fw-bold">Frequently Asked Questions</h2>
-            <div class="accordion faq-accordion" id="faqAccordion">
-              {% for faq in faqs %}
-                <div class="accordion-item">
-                  <h3 class="accordion-header" id="heading-{{ faq.id }}">
-                    <button class="accordion-button {% if not forloop.first %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ faq.id }}" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="collapse-{{ faq.id }}">
-                      {{ faq.question }}
-                    </button>
-                  </h3>
-                  <div id="collapse-{{ faq.id }}" class="accordion-collapse collapse {% if forloop.first %}show{% endif %}" aria-labelledby="heading-{{ faq.id }}" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">
-                      {{ faq.answer|linebreaks }}
-                    </div>
-                  </div>
+        <div class="faq-section bg-white p-4 p-md-5 rounded-4 border border-1 shadow-sm">
+          <h2 id="faqs-heading" class="h3 mb-4 text-primary font-heading fw-bold">Frequently Asked Questions</h2>
+          <div class="accordion faq-accordion" id="faqAccordion">
+            {% for faq in faqs %}
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="heading-{{ faq.id }}">
+                <button class="accordion-button {% if not forloop.first %}collapsed{% endif %}" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#collapse-{{ faq.id }}"
+                  aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
+                  aria-controls="collapse-{{ faq.id }}">
+                  {{ faq.question }}
+                </button>
+              </h3>
+              <div id="collapse-{{ faq.id }}" class="accordion-collapse collapse {% if forloop.first %}show{% endif %}"
+                aria-labelledby="heading-{{ faq.id }}" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  {{ faq.answer|linebreaks }}
                 </div>
-              {% endfor %}
+              </div>
             </div>
+            {% endfor %}
           </div>
+        </div>
         {% endif %}
       </div>
 
@@ -115,51 +120,65 @@
               <i class="bi bi-clock-history" aria-hidden="true"></i>
               <div>
                 <strong>Timeline & Hours:</strong><br>
+                {% if service.timeline %}
+                <span>{{ service.timeline }}</span>
+                {% else %}
                 <span>Flexible based on scope / sprint scheduling.</span>
+                {% endif %}
               </div>
             </li>
             <li class="sidebar-list-item">
               <i class="bi bi-laptop-fill" aria-hidden="true"></i>
               <div>
                 <strong>Delivery Mode:</strong><br>
+                {% if service.delivery_mode %}
+                <span>{{ service.delivery_mode }}</span>
+                {% else %}
                 <span>Remote / Video Consultations & Github Handover.</span>
+                {% endif %}
               </div>
             </li>
             <li class="sidebar-list-item">
               <i class="bi bi-chat-square-text-fill" aria-hidden="true"></i>
               <div>
                 <strong>Response Time:</strong><br>
+                {% if service.response_time %}
+                <span>{{ service.response_time }}</span>
+                {% else %}
                 <span>Within 24 hours.</span>
+                {% endif %}
               </div>
             </li>
           </ul>
-          
+
           <div class="d-grid gap-3">
-            <a href="{% url 'contact:index' %}?subject=Inquiry%20regarding%20{{ service.title|urlencode }}" class="btn btn-primary btn-lg rounded-3 py-3">Book Consultation</a>
+            <a href="{% url 'contact:index' %}?subject=Inquiry%20regarding%20{{ service.title|urlencode }}"
+              class="btn btn-primary btn-lg rounded-3 py-3">Book Consultation</a>
             <a href="{% url 'contact:index' %}" class="btn btn-outline-secondary rounded-3 py-3">Ask a Question</a>
           </div>
         </div>
       </div>
     </div>
-    
+
     <!-- Testimonials Grid -->
     {% if testimonials %}
-      <div class="mt-5 pt-5 border-top border-1 border-light">
-        <div class="text-center mb-5">
-          <span class="badge bg-secondary-subtle text-primary px-3 py-2 rounded-pill uppercase tracking-wider mb-2">Social Proof</span>
-          <h2 class="h3 font-heading fw-bold">What Clients Say About This</h2>
-        </div>
-        <div class="row g-4">
-          {% for testimonial in testimonials %}
-            <div class="col-md-4">
-              {% include "components/testimonial_card.html" %}
-            </div>
-          {% endfor %}
-        </div>
+    <div class="mt-5 pt-5 border-top border-1 border-light">
+      <div class="text-center mb-5">
+        <span class="badge bg-secondary-subtle text-primary px-3 py-2 rounded-pill uppercase tracking-wider mb-2">Social
+          Proof</span>
+        <h2 class="h3 font-heading fw-bold">What Clients Say About This</h2>
       </div>
+      <div class="row g-4">
+        {% for testimonial in testimonials %}
+        <div class="col-md-4">
+          {% include "components/testimonial_card.html" %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
     {% endif %}
   </div>
 </section>
 
-{% include "components/cta_banner.html" with title="Ready to upgrade your technology stack?" description="Let's build a secure, robust and highly scalable software platform together." primary_cta_text="Contact Me" primary_cta_link="/contact/" secondary_cta_text="Back to Services" secondary_cta_link="/services/" %}
+{% include "components/cta_banner.html" with title="Ready to upgrade your technology stack?" description="Let's build asecure, robust and highly scalable software platform together." primary_cta_text="Contact Me" primary_cta_link="/contact/" secondary_cta_text="Back to Services" secondary_cta_link="/services/" %}
 {% endblock %}

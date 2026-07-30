@@ -37,8 +37,9 @@ def home(request):
     timeline_items = Timeline.objects.filter(is_active=True).order_by(
         "display_order",
         "-start_date",
+        "-end_date",
         "-created_at",
-    )[:4]
+    )
     testimonials = Testimonial.objects.filter(is_active=True).order_by(
         "display_order",
         "-created_at",

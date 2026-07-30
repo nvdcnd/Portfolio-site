@@ -5,12 +5,13 @@
         <i class="bi {{ service.icon_class|default:'bi-code-slash' }}"></i>
       </div>
       {% if service.category %}
-        <span class="card-badge">{{ service.category.name }}</span>
+      <span class="card-badge">{{ service.category.name }}</span>
       {% endif %}
     </div>
     <h3 class="card-title h4">{{ service.title }}</h3>
     <p class="card-text flex-grow-1">{{ service.short_description }}</p>
-    <a class="btn-text mt-3" href="{% url 'services:index' %}" aria-label="Explore services including {{ service.title }}">
+    <a class="btn-text mt-3" href="{% url 'services:detail' slug=service.slug %}"
+      aria-label="Explore services including {{ service.title }}">
       Explore {{ service.title }}
       <i class="bi bi-arrow-right" aria-hidden="true"></i>
     </a>
