@@ -5,6 +5,7 @@ python-dotenv
 # Cloudinary (media storage)
 cloudinary
 django-cloudinary-storage
+dj-database-url
 
 # HTML editor and sanitization
 django-tinymce
