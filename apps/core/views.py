@@ -72,3 +72,9 @@ def home(request):
 
 
 index = home
+
+
+def health(request):
+    return HttpResponse("OK")
+
+
