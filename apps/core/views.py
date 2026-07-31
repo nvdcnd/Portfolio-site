@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import JsonResponse
+from django.views.decorators.http import require_http_method
 
 from apps.blog.models import Post
 from apps.common.models import (
@@ -75,7 +76,8 @@ def home(request):
 index = home
 
 
+@require_http_method(["GET","POST","HEAD"])
 def health(request):
-    return HttpResponse("OK")
+    return JsonResponse({'status':'OK'})
 
 
