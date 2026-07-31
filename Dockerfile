@@ -9,4 +9,4 @@ RUN pip install --no-cache-dir -r requirements/prod.txt
 
 COPY . .
 EXPOSE 10000
-CMD ["sh", "-c", "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn config.wsgi:application --bind [IP_ADDRESS]:10000 --workers 2 --threads 4"]
+CMD ["sh", "-c", "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn config.wsgi:application --bind 0.0.0.0:10000 --workers 2 --threads 4"]
